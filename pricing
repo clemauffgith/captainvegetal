@@ -1,0 +1,456 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Pricing Tool Capt Veg</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+</head>
+
+<style>
+    #wrap{
+	width:700px;
+	margin:0 auto;
+	text-align:left;
+	margin-top:8px;
+	padding:5px;
+	background:#fff;
+    font-family:AvenirLTStd, Arial, Helvetica, sans-serif;
+	font-size:13px;    
+    line-height:16px;
+}
+#wrap .cont_details fieldset,.cont_order fieldset{
+	margin:10px;
+	padding:20px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -khtml-border-radius: 10px;
+    border-radius: 10px;
+}
+#wrap legend{
+	font-size:16px;
+	font-family:Georgia, "Times New Roman", Times, serif;
+	color:#000;
+	font-weight:bold;
+	font-style:italic;
+    padding-bottom:10px;
+}
+#wrap .cont_details input{
+	margin-bottom:10px;
+	color:#000;
+}
+#wrap label{
+	display:block;
+	font-size:12px;
+	color:#000;
+    font-weight:bold;
+}
+#wrap label.inlinelabel
+{
+    display:inline;
+}
+#wrap .cont_order input{
+	margin-bottom:5px;
+}
+#wrap .cont_order p{
+	padding-top:5px;
+}
+
+#wrap input[type="radio"]
+{
+margin-top:8px;
+margin-bottom:8px;
+}
+
+#wrap input[type="text"]:hover,
+#wrap input[type="text"]:active {
+background-color: #FAF398;
+}
+
+#wrap input#submit
+{
+margin:10px;
+padding-left:20px;
+padding-right:20px;
+padding-top:10px;
+padding-bottom:10px;
+}
+
+#wrap div#totalPrice
+{
+    padding:10px;
+    font-weight:bold;
+    background-color:#ff0;
+}
+
+#wrap label.radiolabel
+{
+font-weight:normal;
+ display:inline;
+}
+</style>
+<body onload='hideTotal()'>
+    <div id="wrap">
+        <!--id du formulaire  = pricingPlantes-->
+        <form action="" id="pricingPlantes" onsubmit="return false;">
+        <div>
+            <div class="cont_order">
+               <fieldset>
+                <legend>Faites votre pack</legend>
+                <label>Choisissez l'offre : </label>
+                <label class='radiolabel'><input type="radio"  id="offerAchat" name="selectedOffer" value="Achat" onclick="plantesPriceT()" />Achat</label><br/>
+                <label class='radiolabel'><input type="radio"  id="offerAchatEntretien" name="selectedOffer" value="AchatEtEntretien" onclick="plantesPriceT()" />Achat + Entretien</label><br/>
+                <label class='radiolabel'><input type="radio"  id="offerLocation" name="selectedOffer" value="Location" onclick="plantesPriceT()" />Location</label><br/>
+                <br/>
+                <label >Choisissez vos pots : </label>
+                <div>
+                    <label class='radiolabel'><input type="radio"  name="selectedPots" value="TerreCuite" onclick="plantesPriceT()" />Pots en terre-cuite artisanaux</label><br/>
+                    <label class='radiolabel'><input type="radio"  name="selectedPots" value="Reservoirdeau" onclick="plantesPriceT()" />Pots écologiques à reservoir d'eau</label><br/>
+                  </div>
+                <br/>
+                <label>Choisissez vos plantes : </label>
+                <p> Entrez la quantité désirez : </p>
+                <div style="display:flex; flex-direction: row; margin-top: 20px; margin-bottom: 30px;">
+                    <label for="baby-plant" style="margin-right:20px"> Baby plant (25-50cm) Qté :</label><input type="number" id="babyPlanteQty" name="babyPlante" required minlength="1" maxlength="8" oninput="plantesPriceT()" style="margin-right:10px; width: 60px;">
+                    <label for="baby-plant" style="margin-right:10px">Prix/U:</label><input disabled id="babyPlanteU" style="margin-right:10px;">
+                    <label for="baby-plant" style="margin-right:10px">Prix Pot :</label><input disabled id="babyPlantePots" style="margin-right:10px;width: 100px;">
+                </div>
+
+                <div style="display:flex; flex-direction: row; margin-bottom: 30px;">
+                    <label for="teenage-plant" style="margin-right:20px"> Teenage plant (50-100cm) Qté:</label><input type="number" id="teenagePlanteQty" name="teenagePlante" required minlength="1" oninput="plantesPriceT()" maxlength="8" style="margin-right:10px;width: 60px;">
+                    <label for="teenage-plant" style="margin-right:10px">Prix/U:</label><input disabled id="teenagePlanteU" style="margin-right:10px;">
+                    <label for="teenage-plant" style="margin-right:10px">Prix Pot :</label><input disabled id="teenagePlantePots" style="margin-right:10px;">
+                </div>
+
+                <div style="display:flex; flex-direction: row; margin-bottom: 30px;">
+                    <label for="plante-tombante" style="margin-right:10px"> Plante tombante (50-100cm) Qté:</label><input type="number" id="tombantePlanteQty" name="tombantePlante" required minlength="1" oninput="plantesPriceT()" maxlength="8" style="margin-right:10px;width: 60px;">
+                    <label for="plante-tombante" style="margin-right:10px">Prix/U:</label><input disabled id="tombantePlanteU" style="margin-right:10px;">
+                    <label for="plante-tombante" style="margin-right:10px">Prix Pot :</label><input disabled id="tombantePlantePots" style="margin-right:10px;">
+                </div>
+
+                <div style="display:flex; flex-direction: row; margin-bottom: 30px;">
+                    <label for="daddy-plant" style="margin-right:10px"> Daddy plant (100-150cm) Qté:</label><input type="number" id="daddyPlanteQty" name="daddyPlante" required minlength="1" maxlength="8" oninput="plantesPriceT()" style="margin-right:10px;width: 60px;">
+                    <label for="daddy-plant" style="margin-right:10px"> Prix/U:</label><input disabled id="daddyPlanteU" name="daddyPlant" style="margin-right:10px;">
+                    <label for="daddy-plant" style="margin-right:10px"> Prix Pot :</label><input disabled id="daddyPlantePots" style="margin-right:10px;">
+                </div>
+
+                <div style="display:flex; flex-direction: row;margin-bottom: 30px;">
+                    <label for="giant-plant" style="margin-right:10px"> Giant plant (+150cm) Qté:</label><input type="number" id="giantPlanteQty" name="giantPlant" required minlength="1" maxlength="8" oninput="plantesPriceT()" style="margin-right:10px;width: 60px;">
+                    <label for="giant-plant" style="margin-right:5px"> Prix/U:</label><input disabled id="giantPlanteU" name="giantPlant" style="margin-right:10px;">
+                    <label for="giant-plant" style="margin-right:5px"> Prix Pot:</label><input disabled id="giantPlantePots" name="giantPlant" style="margin-right:10px;">
+                </div>
+                <div style="display:flex; flex-direction: row;margin-bottom: 30px;">
+                    <label for="totalPlantes" style="margin-right:10px"> Nombre de plantes:</label><input type="number" disabled id="totalPlanteQty" style="margin-right:10px;width: 60px;">
+                </div>
+
+
+                  <div style="display:flex; flex-direction: row;margin-bottom: 30px; margin-top: 30px">
+                    <label for="cout-entretien" style="margin-right:5px"> Cout entretien par mois: </label><input type="number" disabled id="coutEntretienT" style="margin-right:10px;">
+                </div>
+
+                <div style="display:flex; flex-direction: row;margin-bottom: 30px;">
+                    <label for="totalCoutPlante" style="margin-right:10px"> Cout plantes avec pots HT:</label><input type="number" disabled id="prixPlantesPots" style="margin-right:10px;width: 80px;">
+                </div>
+
+                <div style="display:flex; flex-direction: row;margin-bottom: 30px; margin-top: 30px">
+                    <label for="cout-location" style="margin-right:5px"> Cout Location par mois (si location): </label><input type="number" disabled id="coutLocationT" style="margin-right:10px;">
+                </div>
+
+
+                <div style="display:flex; flex-direction: row;margin-bottom: 30px; margin-top: 30px;">
+                    <label for="Livraison&Installation"> Livraison & Installation : 89€ </label>
+                </div>
+
+                <div id="totalPrice" style="margin-top: 30px;"></div>
+                </fieldset>
+            </div>
+
+            
+        	<div class="cont_details">
+            	<fieldset>
+                <legend>Contact Details</legend>
+                <label for='name'>Nom</label>
+                <input type="text" id="name" name='name' />
+                <br/>
+                <label for='company'>Nom Entreprise</label>
+                <input type="text" id="company" name='company' />
+                <br/>
+                <label for='address'>Address</label>
+                <input type="text" id="address" name='address' />
+                <br/>
+                <label for='phonenumber'>Phone Number</label>
+                <input type="text"  id="phonenumber" name='phonenumber'/>
+                <br/>
+                </fieldset>
+            </div>
+            <input type='submit' id='submit' value='Submit' onclick="calculateTotal()" />
+        </div>  
+       </form>
+	</div><!--End of wrap-->
+
+</body>
+
+</html>
+
+<script>
+    // référencement du formulaire dans notre code Js 
+    var theForm = document.forms["pricingPlantes"]; 
+
+    // Variables prix plantesU
+    var babyPlantePriceU = new Array();
+        babyPlantePriceU["Achat"]=8;
+        babyPlantePriceU["AchatEtEntretien"]=8;
+        babyPlantePriceU["Location"]=1;
+
+    var teenagePlantePriceU = new Array();
+        teenagePlantePriceU["Achat"]=30;
+        teenagePlantePriceU["AchatEtEntretien"]=30;
+        teenagePlantePriceU["Location"]=3;
+
+    var tombantePlantePriceU = new Array();
+        tombantePlantePriceU["Achat"]=35;
+        tombantePlantePriceU["AchatEtEntretien"]=35;
+        tombantePlantePriceU["Location"]=4;   
+    
+    var daddyPlantePriceU = new Array();
+        daddyPlantePriceU["Achat"]=50;
+        daddyPlantePriceU["AchatEtEntretien"]=50;
+        daddyPlantePriceU["Location"]=5;   
+
+    var giantPlantePriceU = new Array();
+        giantPlantePriceU["Achat"]=120;
+        giantPlantePriceU["AchatEtEntretien"]=120;
+        giantPlantePriceU["Location"]=12;   
+    
+
+
+    // Choix Offres => prix plantesU
+    $(document).ready(function() {
+    $('input:radio[name=selectedOffer]').change(function() {
+
+        if (this.value == 'Achat') {
+            document.getElementById('babyPlanteU').value = babyPlantePriceU["Achat"];
+            document.getElementById('teenagePlanteU').value = teenagePlantePriceU["Achat"];
+            document.getElementById('tombantePlanteU').value = tombantePlantePriceU["Achat"];
+            document.getElementById('daddyPlanteU').value = daddyPlantePriceU["Achat"];
+            document.getElementById('giantPlanteU').value = giantPlantePriceU["Achat"]; 
+        }
+        else if (this.value == 'AchatEtEntretien') {
+            document.getElementById('babyPlanteU').value = babyPlantePriceU["AchatEtEntretien"];
+            document.getElementById('teenagePlanteU').value = teenagePlantePriceU["AchatEtEntretien"];
+            document.getElementById('tombantePlanteU').value = tombantePlantePriceU["AchatEtEntretien"];
+            document.getElementById('daddyPlanteU').value = daddyPlantePriceU["AchatEtEntretien"];
+            document.getElementById('giantPlanteU').value = giantPlantePriceU["AchatEtEntretien"]; 
+        }
+        else {
+            document.getElementById('babyPlanteU').value = babyPlantePriceU["Location"];
+            document.getElementById('teenagePlanteU').value = teenagePlantePriceU["Location"];
+            document.getElementById('tombantePlanteU').value = tombantePlantePriceU["Location"];
+            document.getElementById('daddyPlanteU').value = daddyPlantePriceU["Location"];
+            document.getElementById('giantPlanteU').value = giantPlantePriceU["Location"];  
+            }
+        });
+});
+
+    // Choix Pots => prix plantesU
+    $(document).ready(function() {
+    $('input:radio[name=selectedPots]').change(function() {
+
+        if (this.value == 'TerreCuite') {
+            if (document.getElementById('offerLocation').checked) {
+                document.getElementById('babyPlantePots').value = parseInt(document.getElementById('babyPlanteU').value) + 1;
+                document.getElementById('teenagePlantePots').value = parseInt(document.getElementById('teenagePlanteU').value) + 2;
+                document.getElementById('tombantePlantePots').value = parseInt(document.getElementById('tombantePlanteU').value) + 2; 
+                document.getElementById('daddyPlantePots').value = parseInt(document.getElementById('daddyPlanteU').value) + 4; 
+                document.getElementById('giantPlantePots').value = parseInt(document.getElementById('giantPlanteU').value) + 7;
+            }
+            else {
+                document.getElementById('babyPlantePots').value = parseInt(document.getElementById('babyPlanteU').value) + 5;
+                document.getElementById('teenagePlantePots').value = parseInt(document.getElementById('teenagePlanteU').value) + 16;
+                document.getElementById('tombantePlantePots').value = parseInt(document.getElementById('tombantePlanteU').value) + 16;
+                document.getElementById('daddyPlantePots').value = parseInt(document.getElementById('daddyPlanteU').value) + 31;
+                document.getElementById('giantPlantePots').value = parseInt(document.getElementById('giantPlanteU').value) + 69; 
+            }
+        }
+        else if (this.value == 'Reservoirdeau') {
+
+            if (document.getElementById('offerLocation').checked)  {
+                document.getElementById('babyPlantePots').value = parseInt(document.getElementById('babyPlanteU').value) + 3;
+                document.getElementById('teenagePlantePots').value = parseInt(document.getElementById('teenagePlanteU').value) + 3;
+                document.getElementById('tombantePlantePots').value = parseInt(document.getElementById('tombantePlanteU').value) + 3; 
+                document.getElementById('daddyPlantePots').value = parseInt(document.getElementById('daddyPlanteU').value) + 4; 
+                document.getElementById('giantPlantePots').value = parseInt(document.getElementById('giantPlanteU').value) + 9;
+            }
+
+            else {
+                document.getElementById('babyPlantePots').value = parseInt(document.getElementById('babyPlanteU').value) + 25; 
+                document.getElementById('teenagePlantePots').value = parseInt(document.getElementById('teenagePlanteU').value) + 25;
+                document.getElementById('tombantePlantePots').value = parseInt(document.getElementById('tombantePlanteU').value) + 25;
+                document.getElementById('daddyPlantePots').value = parseInt(document.getElementById('daddyPlanteU').value) + 39;
+                document.getElementById('giantPlantePots').value = parseInt(document.getElementById('giantPlanteU').value) + 83; 
+            }
+        }    
+    });
+});
+
+    // Calcul CoutTotal
+    function plantesPriceT() {
+
+    
+        // babyPlante
+        babyPlantePots = document.getElementById('babyPlantePots').value; 
+        babyPlanteQty = document.getElementById('babyPlanteQty').value; 
+        // babyPlanteT = parseInt(babyPlantePots) * parseInt(babyPlanteQty);
+        babyPlanteT = parseInt(babyPlantePots) * parseInt(babyPlanteQty);
+
+        // teenagePlante
+        teenagePlantePots = document.getElementById('teenagePlantePots').value; 
+        teenagePlanteQty = document.getElementById('teenagePlanteQty').value; 
+        // teenagePlanteT = document.getElementById("teenagePlanteT").value = teenagePlanteU * teenagePlanteQty;
+        teenagePlanteT = parseInt(teenagePlantePots) * parseInt(teenagePlanteQty);
+
+        // tombantePlante
+        tombantePlantePots = document.getElementById('tombantePlantePots').value; 
+        tombantePlanteQty = document.getElementById('tombantePlanteQty').value; 
+        // tombantePlanteT = document.getElementById("tombantePlanteT").value = tombantePlanteU * tombantePlanteQty;
+        tombantePlanteT = parseInt(tombantePlantePots) * parseInt(tombantePlanteQty);
+        // daddyPlante
+        daddyPlantePots = document.getElementById('daddyPlantePots').value; 
+        daddyPlanteQty = document.getElementById('daddyPlanteQty').value; 
+        // daddyPlanteT = document.getElementById("daddyPlanteT").value = daddyPlanteU * daddyPlanteQty;
+        daddyPlanteT = parseInt(daddyPlantePots) * parseInt(daddyPlanteQty); 
+
+        //giantPlante
+        giantPlantePots = document.getElementById('giantPlantePots').value; 
+        giantPlanteQty = document.getElementById('giantPlanteQty').value; 
+        // giantPlanteT = document.getElementById("giantPlanteT").value = giantPlanteU * giantPlanteQty;
+        giantPlanteT = parseInt(giantPlantePots) * parseInt(giantPlanteQty); 
+
+        // calcul quantité total plantes 
+        var totalPlanteQ = document.getElementById('totalPlanteQty'); 
+        var totalPlanteQuantity = parseInt(babyPlanteQty) + parseInt(teenagePlanteQty) + parseInt(tombantePlanteQty) + parseInt(daddyPlanteQty) + parseInt(giantPlanteQty); 
+        totalPlanteQ.value = totalPlanteQuantity;
+
+        // Calcul Cout Entretien 
+        var coutEntretienT = document.getElementById('coutEntretienT'); 
+        if (document.getElementById('offerAchatEntretien').checked || document.getElementById('offerLocation').checked){
+            var coutEntretienTotal =  parseInt(totalPlanteQuantity) + 60; 
+            coutEntretienT.value = coutEntretienTotal;
+        }
+
+        // calcul pots 
+        var prixPlantesPots = document.getElementById('prixPlantesPots');
+        var prixPlantesPotsT = parseInt(babyPlanteT) + parseInt(teenagePlanteT) + parseInt(tombantePlanteT) + parseInt(daddyPlanteT) + parseInt(giantPlanteT); 
+        prixPlantesPots.value = prixPlantesPotsT; 
+
+        // calcul Cout Location 
+        var coutLocationT = document.getElementById('coutLocationT'); 
+        if (document.getElementById('offerLocation').checked) {
+            var coutLocation = prixPlantesPotsT;
+            coutLocationT.value = coutLocation; 
+        }
+
+
+        // Calcul cout total TOTAL 
+        var livraisonInstallation = 89; 
+        if (document.getElementById('offerLocation').checked) {
+            var coutTotal = parseInt(coutEntretienTotal) + parseInt(livraisonInstallation) + parseInt(coutLocation);
+        }
+        else if (document.getElementById('offerAchatEntretien').checked) {
+            var coutTotal = parseInt(coutEntretienTotal) + parseInt(livraisonInstallation) + parseInt(prixPlantesPotsT);
+        }
+        else {
+            var coutTotal = parseInt(livraisonInstallation) + parseInt(prixPlantesPotsT);
+        };
+
+        document.getElementById('totalPrice').innerHTML = "Prix total de "+coutTotal+" euros.";
+
+        // calcul prix total HT 
+        // var pricePlanteT = document.getElementById('pricePlanteT'); 
+        // var pricePlanteTotal = parseInt(babyPlanteT) + parseInt(teenagePlanteT) + parseInt(tombantePlanteT) + parseInt(daddyPlanteT) + parseInt(giantPlanteT);
+        // pricePlanteT.value = pricePlanteTotal;
+    };
+
+    // Calcul Plantes Pots HT  function getPlantesPrice () ? 
+
+
+    // Calcul Cout Entretien? function getEntretienPrice() ? 
+
+    // Calcul cout Location function getLocationPrice () ? 
+
+    // Calcul du total function getTotal()? 
+
+</script>
+
+
+<!--id du formulaire  
+// Calcul CoutTotal
+function plantesPriceT() {
+
+    var prixPlantesPots = document.getElementById('prixPlantesPots');
+
+    // babyPlante
+    babyPlantePots = document.getElementById('babyPlantePots').value; 
+    babyPlanteQty = document.getElementById('babyPlanteQty').value; 
+    // babyPlanteT = parseInt(babyPlantePots) * parseInt(babyPlanteQty);
+    babyPlanteT = parseInt(babyPlantePots) * parseInt(babyPlanteQty);
+
+    // teenagePlante
+    teenagePlantePots = document.getElementById('teenagePlantePots').value; 
+    teenagePlanteQty = document.getElementById('teenagePlanteQty').value; 
+    // teenagePlanteT = document.getElementById("teenagePlanteT").value = teenagePlanteU * teenagePlanteQty;
+    teenagePlanteT = parseInt(teenagePlantePots) * parseInt(teenagePlanteQty);
+
+    // tombantePlante
+    tombantePlantePots = document.getElementById('tombantePlantePots').value; 
+    tombantePlanteQty = document.getElementById('tombantePlanteQty').value; 
+    // tombantePlanteT = document.getElementById("tombantePlanteT").value = tombantePlanteU * tombantePlanteQty;
+    tombantePlanteT = parseInt(tombantePlantePots) * parseInt(tombantePlanteQty);
+    // daddyPlante
+    daddyPlantePots = document.getElementById('daddyPlantePots').value; 
+    daddyPlanteQty = document.getElementById('daddyPlanteQty').value; 
+    // daddyPlanteT = document.getElementById("daddyPlanteT").value = daddyPlanteU * daddyPlanteQty;
+    daddyPlanteT = parseInt(daddyPlantePots) * parseInt(daddyPlanteQty); 
+
+    //giantPlante
+    giantPlantePots = document.getElementById('giantPlantePots').value; 
+    giantPlanteQty = document.getElementById('giantPlanteQty').value; 
+    // giantPlanteT = document.getElementById("giantPlanteT").value = giantPlanteU * giantPlanteQty;
+    giantPlanteT = parseInt(giantPlantePots) * parseInt(giantPlanteQty); 
+
+    // calcul quantité total plantes 
+    var totalPlanteQ = document.getElementById('totalPlanteQty'); 
+    var totalPlanteQuantity = parseInt(babyPlanteQty) + parseInt(teenagePlanteQty) + parseInt(tombantePlanteQty) + parseInt(daddyPlanteQty) + parseInt(giantPlanteQty); 
+    totalPlanteQ.value = totalPlanteQuantity;
+
+    // Calcul Cout Entretien 
+    var coutEntretienT = document.getElementById('coutEntretienT'); 
+    if (document.getElementById('offerAchatEntretien').checked || document.getElementById('offerLocation').checked){
+        var coutEntretienTotal =  parseInt(totalPlanteQuantity) + 60; 
+        coutEntretienT.value = coutEntretienTotal;
+    }
+
+    // calcul Cout Location 
+    var coutLocationT = document.getElementById('coutLocationT'); 
+    if (document.getElementById('offerLocation').checked) {
+        var coutLocation = parseInt(coutLocationT) + 60; 
+        coutLocationT.value = coutLocation; 
+    }
+
+    // calcul pots 
+    var prixPlantesPotsT = parseInt(babyPlanteT) + parseInt(teenagePlanteT) + parseInt(tombantePlanteT) + parseInt(daddyPlanteT) + parseInt(giantPlanteT); 
+    prixPlantesPots.value = prixPlantesPotsT; 
+
+    // Calcul cout total TOTAL 
+    var livraisonInstallation = 89; 
+    var coutTotal = parseInt(coutEntretienTotal) + parseInt(livraisonInstallation) + parseInt(coutLocation) + parseInt(prixPlantesPotsT);
+    document.getElementById('totalPrice').innerHTML = "Prix total de "+coutTotal+" euros.";
+
+    // calcul prix total HT 
+    // var pricePlanteT = document.getElementById('pricePlanteT'); 
+    // var pricePlanteTotal = parseInt(babyPlanteT) + parseInt(teenagePlanteT) + parseInt(tombantePlanteT) + parseInt(daddyPlanteT) + parseInt(giantPlanteT);
+    // pricePlanteT.value = pricePlanteTotal;
+};
+pricingPlantes-->
