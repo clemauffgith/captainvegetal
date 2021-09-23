@@ -34,12 +34,15 @@
     $(document).ready(function() {
     $('input:radio[name=selectedOffer]').change(function() {
 
+
         if (this.value == 'Achat') {
             document.getElementById('babyPlanteU').value = babyPlantePriceU["Achat"];
             document.getElementById('teenagePlanteU').value = teenagePlantePriceU["Achat"];
             document.getElementById('tombantePlanteU').value = tombantePlantePriceU["Achat"];
             document.getElementById('daddyPlanteU').value = daddyPlantePriceU["Achat"];
             document.getElementById('giantPlanteU').value = giantPlantePriceU["Achat"]; 
+            document.getElementById('coutLoc').style.display = "none"; 
+            document.getElementById('coutEnt').style.display = "none";
         }
         else if (this.value == 'AchatEtEntretien') {
             document.getElementById('babyPlanteU').value = babyPlantePriceU["AchatEtEntretien"];
@@ -47,6 +50,8 @@
             document.getElementById('tombantePlanteU').value = tombantePlantePriceU["AchatEtEntretien"];
             document.getElementById('daddyPlanteU').value = daddyPlantePriceU["AchatEtEntretien"];
             document.getElementById('giantPlanteU').value = giantPlantePriceU["AchatEtEntretien"]; 
+            document.getElementById('coutLoc').style.display = "none"; 
+            document.getElementById('coutEnt').style.display = "flex";
         }
         else {
             document.getElementById('babyPlanteU').value = babyPlantePriceU["Location"];
@@ -54,6 +59,8 @@
             document.getElementById('tombantePlanteU').value = tombantePlantePriceU["Location"];
             document.getElementById('daddyPlanteU').value = daddyPlantePriceU["Location"];
             document.getElementById('giantPlanteU').value = giantPlantePriceU["Location"];  
+            document.getElementById('coutLoc').style.display = "flex";
+            document.getElementById('coutEnt').style.display = "flex";  
             }
         });
 });
@@ -101,13 +108,21 @@
 
     // Calcul CoutTotal
     function plantesPriceT() {
+       
 
-    
         // babyPlante
         babyPlantePots = document.getElementById('babyPlantePots').value; 
         babyPlanteQty = document.getElementById('babyPlanteQty').value; 
         // babyPlanteT = parseInt(babyPlantePots) * parseInt(babyPlanteQty);
         babyPlanteT = parseInt(babyPlantePots) * parseInt(babyPlanteQty);
+
+        if(isNaN(babyPlantePots) == true) {
+            document.getElementById('babyPlantePots').style.display = "none";
+        } 
+        else {
+            document.getElementById('babyPlantePots').style.display = "block";
+        }
+
 
         // teenagePlante
         teenagePlantePots = document.getElementById('teenagePlantePots').value; 
@@ -131,6 +146,7 @@
         giantPlanteQty = document.getElementById('giantPlanteQty').value; 
         // giantPlanteT = document.getElementById("giantPlanteT").value = giantPlanteU * giantPlanteQty;
         giantPlanteT = parseInt(giantPlantePots) * parseInt(giantPlanteQty); 
+
 
         // calcul quantité total plantes 
         var totalPlanteQ = document.getElementById('totalPlanteQty'); 
@@ -156,6 +172,8 @@
             coutLocationT.value = coutLocation; 
         }
 
+       
+
 
         // Calcul cout total TOTAL 
         var livraisonInstallation = 89; 
@@ -169,10 +187,47 @@
             var coutTotal = parseInt(livraisonInstallation) + parseInt(prixPlantesPotsT);
         };
 
+
         document.getElementById('totalPrice').innerHTML = "Prix total de "+coutTotal+" euros.";
+
+        if(isNaN(coutTotal) == true) {
+            document.getElementById('totalPrice').style.display = "none";
+        } 
+        else {
+            document.getElementById('totalPrice').style.display = "block";
+        }
+    
 
         // calcul prix total HT 
         // var pricePlanteT = document.getElementById('pricePlanteT'); 
         // var pricePlanteTotal = parseInt(babyPlanteT) + parseInt(teenagePlanteT) + parseInt(tombantePlanteT) + parseInt(daddyPlanteT) + parseInt(giantPlanteT);
         // pricePlanteT.value = pricePlanteTotal;
     };
+
+    // Calcul Plantes Pots HT  function getPlantesPrice () ? 
+
+
+    // Calcul Cout Entretien? function getEntretienPrice() ? 
+
+    // Calcul cout Location function getLocationPrice () ? 
+
+    // Calcul du total function getTotal()? 
+
+// // Calcul CoutTotal
+// function plantesPriceT() {
+
+//     var prixPlantesPots = document.getElementById('prixPlantesPots');
+
+//     // babyPlante
+//     babyPlantePots = document.getElementById('babyPlantePots').value; 
+//     babyPlanteQty = document.getElementById('babyPlanteQty').value; 
+//     // babyPlanteT = parseInt(babyPlantePots) * parseInt(babyPlanteQty);
+//     babyPlanteT = parseInt(babyPlantePots) * parseInt(babyPlanteQty);
+
+//     // teenagePlante
+//     teenagePlantePots = document.getElementById('teenagePlantePots').value; 
+//     teenagePlanteQty = document.getElementById('teenagePlanteQty').value; 
+//     // teenagePlanteT = document.getElementById("teenagePlanteT").value = teenagePlanteU * teenagePlanteQty;
+//     teenagePlanteT = parseInt(teenagePlantePots) * parseInt(teenagePlanteQty);
+
+//     // tombantePlante
