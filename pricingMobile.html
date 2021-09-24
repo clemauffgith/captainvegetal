@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Pricing Mobile</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="pricingMobile.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="pricing.js"></script>
+    </head>
+
+    <body onload='hideTotal()'>
+    <div id="wrap">
+        <!--id du formulaire  = pricingPlantes-->
+        <form action="" id="pricingPlantes" onsubmit="return false;">
+                    <div class="choice-boxes">
+                        <h3 style="font-size: 14px; font-weight:bold; color: #426a5a"> Etape 1 - Choisissez l'offre : </h3>
+                        <div style="display:flex; flex-direction: column; justify-content: center;">  
+                            <input type="radio"  id="offerAchat" name="selectedOffer" value="Achat" onclick="plantesPriceT()"><label for="offerAchat" class='radiolabelOffer'>Achat</label>
+                            <input type="radio"  id="offerAchatEntretien" name="selectedOffer" value="AchatEtEntretien" onclick="plantesPriceT()"><label for="offerAchatEntretien" class='radiolabelOffer'>Achat + Entretien</label>
+                            <input type="radio"  id="offerLocation" name="selectedOffer" value="Location" onclick="plantesPriceT()"><label for="offerLocation" class='radiolabelOffer'>Location</label><br/>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="choice-boxes">
+                        <h3 style="font-size: 14px; font-weight:bold; color: #426a5a"> Etape 2 - Choisissez vos pots : </h3>
+                        <div style="display: flex; flex-direction: column; margin-bottom: 10px; justify-content:center;">
+                            <input type="radio" id="TerreCuite" name="selectedPots" value="TerreCuite" onclick="plantesPriceT()"><label for="TerreCuite" class='radiolabelPots'>Pots en terre-cuite artisanaux</label>
+                            <input type="radio" id="Reservoirdeau" name="selectedPots" value="Reservoirdeau" onclick="plantesPriceT()"><label for="Reservoirdeau" class='radiolabelPots'>Pots écologiques à reservoir d'eau</label><br/>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="choice-plants">
+                        <h3 style="font-size: 14px; font-weight:bold; color: #426a5a"> Etape 3 - Choisissez vos plantes et leur quantité : </h3>
+                        <div style="padding-left: 20px;">
+                            <h5>Baby plant (25-50cm) : </h5>
+                            <div style="display:flex; flex-direction: row; margin-top: 20px; margin-bottom: 20px;">    
+                                <label for="babyPlanteQty">Qté:</label><input type="number" id="babyPlanteQty" name="babyPlante" required minlength="1" maxlength="8" oninput="plantesPriceT()">
+                                <label for="baby-plant">Prix/U:</label><input class="inputUPots" disabled id="babyPlanteU">
+                                <label for="baby-plant">+Pot:</label><input class="inputUPots" disabled id="babyPlantePots">
+                            </div>
+
+                            <h5> Teenage Plante (50-100cm) : </h5>
+                            <div style="display:flex; flex-direction: row; margin-bottom: 20px; margin-top: 10px">
+                                <label for="teenagePlanteQty"> Qté:</label><input type="number" id="teenagePlanteQty" name="teenagePlante" required minlength="1" oninput="plantesPriceT()" maxlength="8">
+                                <label for="teenage-plant">Prix/U:</label><input class="inputUPots" disabled id="teenagePlanteU">
+                                <label for="teenage-plant">+Pot:</label><input class="inputUPots" disabled id="teenagePlantePots">
+                            </div>
+
+                            <h5> Plante Tombante (100-150cm) : </h5>
+                            <div style="display:flex; flex-direction: row; margin-bottom: 20px; margin-top: 10px;">
+                                <label for="tombantePlanteQty">Qté:</label><input type="number" id="tombantePlanteQty" name="tombantePlante" required minlength="1" oninput="plantesPriceT()" maxlength="8">
+                                <label for="plante-tombante">Prix/U:</label><input class="inputUPots" disabled id="tombantePlanteU">
+                                <label for="plante-tombante">+Pot:</label><input class="inputUPots" disabled id="tombantePlantePots">
+                            </div>
+
+                            <h5> Daddy Plant (100-150cm) : </h5>
+                            <div style="display:flex; flex-direction: row; margin-bottom: 20px; margin-top: 10px;">
+                                <label for="daddyPlanteQty">Qté:</label><input type="number" id="daddyPlanteQty" name="daddyPlante" required minlength="1" maxlength="8" oninput="plantesPriceT()">
+                                <label for="daddy-plant">Prix/U:</label><input class="inputUPots" disabled id="daddyPlanteU" name="daddyPlant">
+                                <label for="daddy-plant">+Pot:</label><input class="inputUPots" disabled id="daddyPlantePots">
+                            </div>
+
+                            <h5>Giant plant (+150cm) :</h5>
+                            <div style="display:flex; flex-direction: row;margin-bottom: 20px; margin-top:10px;">
+                                <label for="giantPlanteQty">Qté:</label><input type="number" id="giantPlanteQty" name="giantPlant" required minlength="1" maxlength="8" oninput="plantesPriceT()">
+                                <label for="giant-plant">Prix/U:</label><input class="inputUPots" disabled id="giantPlanteU" name="giantPlant">
+                                <label for="giant-plant">+Pot:</label><input class="inputUPots" disabled id="giantPlantePots" name="giantPlant">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="total-numbers">
+                        <div style="display:flex; flex-direction: row; margin-bottom: 20px;">
+                            <label for="totalPlanteQty"> Nombre de plantes :</label><input type="number" disabled id="totalPlanteQty">
+                        </div>
+                        <div id="coutEnt" style="display:flex; flex-direction: row;margin-bottom: 30px; margin-top: 30px">
+                            <label for="coutEntretienT"> Cout entretien par mois : </label><input type="number" disabled id="coutEntretienT">
+                        </div>
+
+                        <div style="display:flex; flex-direction: row;margin-bottom: 30px;">
+                            <label for="prixPlantesPots" style="margin-right:5px;"> Cout plantes avec pots HT :</label><input type="number" disabled id="prixPlantesPots">
+                        </div>
+
+                        <div id="coutLoc" style="display:flex; flex-direction: row;margin-bottom: 30px; margin-top: 30px">
+                            <label for="coutLocationT" style="margin-right:5px;"> Cout Location par mois (si location) : </label><input type="number" disabled id="coutLocationT">
+                        </div>
+
+
+                        <div style="display:flex; flex-direction: row;margin-bottom: 30px; margin-top: 30px;">
+                            <label for="Livraison&Installation;"> Livraison & Installation : 89€ </label>
+                        </div>
+
+                        <div id="totalPrice" style="margin-top: 30px;"></div>
+                    </div>
+
+            
+        	        <div class="contact-form">
+                        <h3 style="font-size: 15px; font-weight:bold; color: #426a5a"> Etape 4 - On se contacte !</h3>
+                        <div class="left-inputs">
+                            <div style="display:flex; flex-direction: column;">
+                                <label for='name' style="margin-top: 5px;  color: #426a5a">Nom</label>
+                                <input type="text" id="name" name='name' style="width: 200px; height: 20px;padding: 3px;" />
+                            <br/>
+                                <label for='company' style="margin-top: 5px;  color: #426a5a">Nom Entreprise</label>
+                                <input type="text" id="company" name='company' style="width: 200px; height: 20px; padding: 3px;"/>
+                            <br/>
+                                <label for='address' style="margin-top: 5px;  color: #426a5a">Adresse</label>
+                                <input type="text" id="address" name='address' style="width: 200px; height: 20px; padding: 3px;"/>
+                            <br/>
+                                <label for='phonenumber' style="margin-top: 5px; color: #426a5a">Téléphone</label>
+                                <input type="text"  id="phonenumber" name='phonenumber' style="width: 200px; height: 20px; padding: 3px;"/>
+                        <button class="button-56" role="button" onclick="calculateTotal()"> Envoyer </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+	</div>
+</body>
+        
+</html>
