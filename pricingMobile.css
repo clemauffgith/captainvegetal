@@ -1,0 +1,228 @@
+    /* wrap général */ 
+    #wrap{
+        font-family:'Open Sans', sans-serif;
+        padding-bottom: 100px;
+        padding-top: 20px;
+        padding-left: 5%;
+        background-color: #416a5a;
+    }
+    
+    #pricingPlantes {
+        display:flex;
+        flex-direction: column;
+    }
+    
+    h5, h3 {
+        font-size: 13px;
+    }
+    
+    /* style boxes choix des offres + choix nbre plantes */ 
+    .choice-boxes, .choice-plants {
+        width: 320px;
+        padding : 20px;
+        border-radius: 20px;
+        background-color: #ebecf0;
+        box-shadow: 1px 1px 5px 0  #ebecf0;
+        justify-content: center;
+    }
+    
+    .choice-boxes:hover, .choice-plants:hover {
+        transform: translateY(-6px);
+        transition: all 0.5s;
+    }
+    
+    /* choix nbre de plantes */
+    .choice-plants .inputUPots {
+        border: none;
+        background: transparent;
+        font-size: 13px;
+    }
+    
+    .choice-plants label {
+        font-size: 12px;
+        margin-right: 5px;
+    }
+    
+    .choice-plants input {
+        width: 40px;
+        margin-right: 20px;
+        height: 18px;
+        border-radius: 4px;
+    }
+    
+    
+    /* style box nombres */ 
+    .total-numbers {
+        width: 320px;
+        padding : 20px;
+        background-color: #ebecf0;
+        border-radius: 20px;
+        box-shadow: 1px 1px 5px 0 #ebecf0;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    
+    .total-numbers input {width: 40px; height: 20px; font-size: 13px;}
+    
+    .total-numbers label {
+        font-size: 13px;
+        margin-right: 5px;
+    }
+    
+    .total-numbers:hover {
+        transform: translateY(-6px);
+        transition: all 0.5s;
+    }
+    
+    .total-numbers input {
+        border: none;
+        background: transparent;
+        font-size: 15px;
+    }
+    
+    /* style du formulaire de contact */ 
+    .contact-form {
+        width: 320px;
+        padding : 20px;
+        background-color: #ebecf0;
+        border-radius: 20px;
+        box-shadow: 1px 1px 5px 0 #ebecf0;
+        margin-top: 20px;
+    }
+    
+    .contact-form:hover {
+        transform: translateY(-6px);
+        transition: all 0.5s;
+    }
+
+    .contact-form label {
+        font-size: 13px;
+        margin-bottom: 3px;
+    }
+    
+    /* style label des boutons radios offre & Pots */ 
+    .radiolabelOffer, .radiolabelPots, .button-56 {
+        cursor: pointer;
+        border: 0.5px solid black;
+        padding-right: 15px;
+        padding-top: 5px;
+        padding-bottom: 15px;
+        align-items: center;
+        justify-content: center;
+        background-color: #416a5a;
+        color: white;
+        border: 2px solid #111;
+        border-radius: 8px;
+        box-sizing: border-box;
+        display: flex;
+        font-family: 'Open Sans',sans-serif;
+        font-size: 12px;
+        line-height: 24px;
+        width: 70%;
+        height: 42px;
+        padding-left: 10px;
+        padding: 10 10px;
+        position: relative;
+        text-align: center;
+        text-decoration: none;
+        user-select: none;
+        -webkit-user-select: none;
+    }
+    
+    .button-56 {
+        margin-top: 30px;
+        text-align: center;
+    }
+    
+    
+    
+    .radiolabelOffer:after, .radiolabelPots:after, .button-56:after  {
+        background-color: #63cf99;
+        border-radius: 8px;
+        content: "";
+        display: block;
+        height: 41px;
+        left: 0;
+        width: 100%;
+        position: absolute;
+        top: -1px;
+        transform: translate(5px, 5px);
+        transition: transform .2s ease-out;
+        z-index: -1;
+      }
+    
+     /* style inputs offres et pots */  
+      input[type="radio"] {
+        visibility: hidden;
+    }
+    
+      input[type="radio"]:hover+label:after {
+        transform: translate(0, 0);
+        }  
+    
+      input[type="radio"]:checked+label {
+        background-color: orange; 
+        }  
+    
+        input[type="radio"]:checked +label:after {
+            transform: translate(0, 0);
+        }
+    
+      .radiolabelPots:active {
+        background-color: #ffdeda;
+        outline: 0;
+      }
+    
+      #wrap label.radiolabelPots
+        {
+            font-weight:normal;
+            display:inline;
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+    
+        input[type="text"] {
+                border: none;
+                border-bottom: solid 2px #63cf99;
+                border-radius: 0px;
+            }	
+        
+        input[type="text"]:focus {
+            border: none;
+            border-bottom: solid 2px #63cf99;
+        }	
+    
+    #wrap input[type="text"]:active {
+    background-color: white;
+    border: none;
+    
+    }
+    
+    
+    #wrap div#totalPrice
+    {
+        font-weight:bold;
+    }
+    
+    #wrap label.radiolabelOffer
+    {
+    font-weight:normal;
+     display:inline;
+     margin-left: 10px;
+     margin-right: 10px;
+    }
+    
+    
+    /* CSS submit button */
+    .button-56:hover:after {
+      transform: translate(0, 0);
+    }
+    
+    .button-56:active {
+      background-color: #ffdeda;
+      outline: 0;
+    }
+    
+    .button-56:hover {
+      outline: 0;
+    }
