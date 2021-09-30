@@ -59,6 +59,7 @@
             document.getElementById('tombantePlanteU').value = tombantePlantePriceU["Location"];
             document.getElementById('daddyPlanteU').value = daddyPlantePriceU["Location"];
             document.getElementById('giantPlanteU').value = giantPlantePriceU["Location"];  
+            document.getElementById('coutPlantes').style.display = "none"; 
             document.getElementById('coutLoc').style.display = "flex";
             document.getElementById('coutEnt').style.display = "flex";  
             }
